@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What Wasn’t Said — Mixed‑Media Grief Journal</title>
+  <style>
+    :root{
+      --bg:#0e0f12; --card:#15171c; --ink:#e8e9f1; --muted:#a3a8b6; --accent:#9b87f5; --edge:#232633;
+      --red:#ff6b6b; --amber:#ffb020; --green:#35d49a; --purple:#b794f6; --blue:#70b7ff;
+    }
+    /* Light mode */
+    .light{ --bg:#f7f7fb; --card:#ffffff; --ink:#0f1222; --muted:#60667a; --accent:#6b5cff; --edge:#e7e9f2; }
+
+    html,body{height:100%;}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+
+    .wrap{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    aside{border-right:1px solid var(--edge);background:linear-gradient(180deg, rgba(155,135,245,0.08), transparent 120px);}
+    main{padding:28px;}
+
+    .brand{display:flex;align-items:center;gap:10px;padding:18px 16px;border-bottom:1px solid var(--edge)}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+    .brand h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.2px}
+
+    .nav{padding:12px}
+    .nav a{display:block;color:var(--ink);text-decoration:none;padding:10px 12px;border-radius:12px;border:1px solid transparent}
+    .nav a:hover{background:rgba(155,135,245,.08);border-color:var(--edge)}
+    .group{margin:18px 0 8px 12px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+
+    .toolbar{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--edge)}
+    .btn{appearance:none;border:1px solid var(--edge);background:var(--card);color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+
+    section{background:var(--card);border:1px solid var(--edge);border-radius:16px;margin:0 0 24px 0;padding:20px}
+    h2{margin:.2rem 0 1rem 0;font-size:22px}
+    h3{margin:1.25rem 0 .5rem 0}
+    p{margin:.5rem 0}
+
+    .callout{display:flex;gap:12px;padding:14px;border:1px dashed var(--edge);border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,.02), transparent)}
+    .quote{border-left:3px solid var(--accent);padding-left:12px;color:var(--muted)}
+
+    details{border:1px solid var(--edge);border-radius:12px;margin:.5rem 0;overflow:hidden}
+    details[open]>summary{border-bottom:1px solid var(--edge)}
+    summary{list-style:none;padding:12px 14px;background:rgba(155,135,245,.07);cursor:pointer}
+    summary::-webkit-details-marker{display:none}
+
+    .db{display:grid;gap:8px}
+    .db .row{display:grid;grid-template-columns:repeat(8, minmax(80px,1fr));gap:8px}
+    .db .row>input,.db .row>textarea,.db .row>select{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--edge);border-radius:10px;color:var(--ink)}
+    .db .row>textarea{min-height:72px}
+    .chip{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid var(--edge);font-size:12px;color:var(--muted)}
+
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--edge);background:var(--bg);padding:8px 10px;border-radius:999px}
+    .rowhead{font-weight:600;color:var(--muted);margin-bottom:6px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+    .card{border:1px solid var(--edge);border-radius:14px;padding:12px;background:var(--bg)}
+
+    .small{font-size:13px;color:var(--muted)}
+
+    .sticky{position:sticky;top:0;background:var(--card);z-index:2;padding:8px 0}
+
+    .sep{height:1px;background:var(--edge);margin:12px 0}
+
+    .kbd{font:12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg);border:1px solid var(--edge);padding:2px 6px;border-radius:6px;color:var(--muted)}
+
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr}
+      aside{position:sticky;top:0;z-index:3}
+      .nav{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+      .nav a{padding:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside>
+      <div class="brand">
+        <div class="dot"></div>
+        <h1>What Wasn’t Said</h1>
+      </div>
+      <div class="nav" id="nav">
+        <div class="group">Home</div>
+        <a href="#cover">Cover</a>
+        <a href="#toc">Table of Contents</a>
+        <div class="group">Databases</div>
+        <a href="#poetry">Poetry</a>
+        <a href="#voice">Voice Recordings</a>
+        <a href="#screaming">Screaming Recordings</a>
+        <a href="#video">Video</a>
+        <a href="#photos">Photography</a>
+        <a href="#searches">His Internet Searches</a>
+        <a href="#month">The Last Month</a>
+        <a href="#found">Things I Found After</a>
+        <div class="group">Pages</div>
+        <a href="#unsaid">Things He Didn’t Say</a>
+        <a href="#loved">Things He Loved</a>
+        <a href="#mad">Why I’m Mad</a>
+      </div>
+      <div class="toolbar">
+        <button class="btn" id="toggleTheme" title="Toggle light/dark">Toggle theme</button>
+        <button class="btn" id="expandAll" title="Open all toggles">Open all</button>
+        <button class="btn" id="collapseAll" title="Close all toggles">Close all</button>
+      </div>
+    </aside>
+
+    <main>
+      <section id="cover">
+        <div class="sticky">
+          <h2>🌒 Cover</h2>
+        </div>
+        <div class="quote">“Grief is love with nowhere to go.”</div>
+        <p class="small">Add a photo, a color, or an emoji that feels like the truth today.</p>
+        <div class="callout">
+          <span>💡</span>
+          <div>
+            <strong>Intention (optional)</strong>
+            <ul>
+              <li>I will let the page hold what I can’t carry right now.</li>
+              <li>I will not force myself to make this pretty.</li>
+              <li>I reserve the right to change my mind later.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="toc">
+        <h2>🗂 Table of Contents</h2>
+        <div class="grid">
+          <a class="pill" href="#poetry">📜 Poetry</a>
+          <a class="pill" href="#voice">🔊 Voice Recordings</a>
+          <a class="pill" href="#screaming">🗯️ Screaming Recordings</a>
+          <a class="pill" href="#video">🎥 Video</a>
+          <a class="pill" href="#photos">📷 Photography</a>
+          <a class="pill" href="#searches">🔎 His Internet Searches</a>
+          <a class="pill" href="#unsaid">🕳️ Things He Didn’t Say</a>
+          <a class="pill" href="#loved">✨ Things He Loved</a>
+          <a class="pill" href="#mad">💢 Why I’m Mad</a>
+          <a class="pill" href="#month">🕯️ The Last Month</a>
+          <a class="pill" href="#found">🧩 Things I Found After</a>
+        </div>
+      </section>
+
+      <!-- DATABASE‑LIKE SECTIONS -->
+      <section id="poetry">
+        <h2>📜 Poetry</h2>
+        <p class="small">Prompts: the poem for the night before · a poem of objects · questions never asked · what the silence said.</p>
+        <details open>
+          <summary>+ New Poem</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Title</div>
+              <div class="rowhead">Date</div>
+              <div class="rowhead">Emotion</div>
+              <div class="rowhead">Tags</div>
+              <div class="rowhead">Audio URL</div>
+              <div class="rowhead" style="grid-column: span 3;">Text</div>
+            </div>
+            <div class="row">
+              <input placeholder="Untitled" />
+              <input type="date" />
+              <select>
+                <option>raw</option>
+                <option>hollow</option>
+                <option>quiet</option>
+                <option>angry</option>
+              </select>
+              <input placeholder="poem, first-draft" />
+              <input placeholder="https://…" />
+              <textarea style="grid-column: span 3" placeholder="Write here…"></textarea>
+            </div>
+          </div>
+        </details>
+        <div class="sep"></div>
+        <div class="grid" id="poetryCards">
+          <div class="card"><div class="small">raw • first-draft</div><h3>Untitled</h3><p>Write here…</p></div>
+        </div>
+      </section>
+
+      <section id="voice">
+        <h2>🔊 Voice Recordings</h2>
+        <details>
+          <summary>+ New Entry</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Title</div>
+              <div class="rowhead">Date</div>
+              <div class="rowhead">Place</div>
+              <div class="rowhead">Intensity (1‑5)</div>
+              <div class="rowhead">Tags</div>
+              <div class="rowhead">Audio URL</div>
+              <div class="rowhead">Notes</div>
+            </div>
+            <div class="row">
+              <input placeholder="Screaming in the Driveway" />
+              <input type="date" />
+              <input placeholder="driveway" />
+              <input type="number" min="1" max="5" value="5" />
+              <input placeholder="scream, panic" />
+              <input placeholder="https://…" />
+              <textarea placeholder=""></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section id="screaming">
+        <h2>🗯️ Screaming Recordings</h2>
+        <p class="small">Tip: filter by Intensity ≥ 4 when you only want to surface the most intense entries.</p>
+        <details>
+          <summary>+ New Entry</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Title</div>
+              <div class="rowhead">Date</div>
+              <div class="rowhead">Place</div>
+              <div class="rowhead">Intensity (1‑5)</div>
+              <div class="rowhead">Trigger</div>
+              <div class="rowhead">Tags</div>
+              <div class="rowhead">Audio URL</div>
+              <div class="rowhead">Notes</div>
+            </div>
+            <div class="row">
+              <input placeholder="It Wouldn’t Stop" />
+              <input type="date" />
+              <input placeholder="bedroom" />
+              <input type="number" min="1" max="5" value="5" />
+              <input placeholder="message thread" />
+              <input placeholder="scream, acute" />
+              <input placeholder="https://…" />
+              <textarea placeholder=""></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section id="video">
+        <h2>🎥 Video</h2>
+        <details>
+          <summary>+ New Clip</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Title</div>
+              <div class="rowhead">Date</div>
+              <div class="rowhead">Location</div>
+              <div class="rowhead">Tags</div>
+              <div class="rowhead">Video URL</div>
+              <div class="rowhead" style="grid-column: span 3;">Context</div>
+            </div>
+            <div class="row">
+              <input placeholder="Untitled Clip" />
+              <input type="date" />
+              <input placeholder="" />
+              <input placeholder="after, night" />
+              <input placeholder="https://…" />
+              <textarea style="grid-column: span 3" placeholder=""></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section id="photos">
+        <h2>📷 Photography</h2>
+        <details>
+          <summary>+ New Photo</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Title</div>
+              <div class="rowhead">Date</div>
+              <div class="rowhead">Place</div>
+              <div class="rowhead">Subject</div>
+              <div class="rowhead">Emotion</div>
+              <div class="rowhead">Tags</div>
+              <div class="rowhead">Image URL</div>
+              <div class="rowhead">Notes</div>
+            </div>
+            <div class="row">
+              <input placeholder="The Empty Chair" />
+              <input type="date" />
+              <input placeholder="kitchen" />
+              <input placeholder="chair" />
+              <select>
+                <option>hollow</option>
+                <option>after</option>
+                <option>home</option>
+              </select>
+              <input placeholder="after, home" />
+              <input placeholder="https://…" />
+              <textarea placeholder=""></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section id="searches">
+        <h2>🔎 His Internet Searches</h2>
+        <p class="small">Consider grouping by date; add a short reflection under each.</p>
+        <details>
+          <summary>+ New Search</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Date</div>
+              <div class="rowhead">Query</div>
+              <div class="rowhead">Category</div>
+              <div class="rowhead">Screenshot URL</div>
+              <div class="rowhead" style="grid-column: span 4;">Your Reflection</div>
+            </div>
+            <div class="row">
+              <input type="date" />
+              <input placeholder="evening hikes near me" />
+              <select>
+                <option>outdoors</option>
+                <option>health</option>
+                <option>tech</option>
+                <option>music</option>
+                <option>other</option>
+              </select>
+              <input placeholder="https://…" />
+              <textarea style="grid-column: span 4" placeholder=""></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section id="month">
+        <h2>🕯️ The Last Month</h2>
+        <details>
+          <summary>+ New Timeline Entry</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Start Date</div>
+              <div class="rowhead">End Date</div>
+              <div class="rowhead">Title</div>
+              <div class="rowhead">Type</div>
+              <div class="rowhead">Attachment URL</div>
+              <div class="rowhead" style="grid-column: span 3;">Notes</div>
+            </div>
+            <div class="row">
+              <input type="date" />
+              <input type="date" />
+              <input placeholder="The Week Everything Tilted" />
+              <select>
+                <option>event</option>
+                <option>note</option>
+                <option>artifact</option>
+              </select>
+              <input placeholder="https://…" />
+              <textarea style="grid-column: span 3" placeholder=""></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section id="found">
+        <h2>🧩 Things I Found After</h2>
+        <details>
+          <summary>+ New Item</summary>
+          <div class="db">
+            <div class="row">
+              <div class="rowhead">Title</div>
+              <div class="rowhead">Date Found</div>
+              <div class="rowhead">Where</div>
+              <div class="rowhead">Tags</div>
+              <div class="rowhead">Image/File URL</div>
+              <div class="rowhead" style="grid-column: span 3;">Meaning</div>
+            </div>
+            <div class="row">
+              <input placeholder="Bus Ticket Stub" />
+              <input type="date" />
+              <input placeholder="coat pocket" />
+              <input placeholder="found, small" />
+              <input placeholder="https://…" />
+              <textarea style="grid-column: span 3" placeholder=""></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- PAGE‑STYLE SECTIONS -->
+      <section id="unsaid">
+        <h2>🕳️ Things He Didn’t Say</h2>
+        <details open>
+          <summary>Call & Response (template)</summary>
+          <p><strong>You:</strong> Why didn’t you call me that night?</p>
+          <p><strong>Him (imagined):</strong> …</p>
+          <p><strong>You:</strong> I would have driven.</p>
+          <p><strong>Him (imagined):</strong> …</p>
+        </details>
+      </section>
+
+      <section id="loved">
+        <h2>✨ Things He Loved</h2>
+        <div class="grid">
+          <div class="card"><div class="rowhead">Songs</div><p class="small">Add tracks or links.</p></div>
+          <div class="card"><div class="rowhead">Shows</div></div>
+          <div class="card"><div class="rowhead">Food</div></div>
+          <div class="card"><div class="rowhead">Places</div></div>
+          <div class="card"><div class="rowhead">People</div></div>
+          <div class="card"><div class="rowhead">Quiet things</div></div>
+          <div class="card"><div class="rowhead">Messy things</div></div>
+        </div>
+      </section>
+
+      <section id="mad">
+        <h2>💢 Why I’m Mad</h2>
+        <div class="callout">
+          <span>🧯</span>
+          <div>
+            Say it plainly. You can always archive or soft‑delete later.
+            <ul>
+              <li>This shouldn’t have been mine to carry because…</li>
+              <li>I’m mad at me for…</li>
+              <li>I’m mad at you for…</li>
+              <li>I’m mad at the system for…</li>
+              <li>What I wish I could break safely is…</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>🔐 Safety & Care</h2>
+        <ul>
+          <li>Use collapsible sections to soften impact. Click <span class="kbd">Open all</span>/<span class="kbd">Close all</span> in the sidebar.</li>
+          <li>Duplicate this page before big edits.</li>
+          <li>Consider locking the most intense sections if you embed this in another system.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const toggleTheme = document.getElementById('toggleTheme');
+    const expandAll = document.getElementById('expandAll');
+    const collapseAll = document.getElementById('collapseAll');
+
+    function setMode(mode){
+      if(mode==='light'){ document.body.classList.add('light'); localStorage.setItem('gj_mode','light'); }
+      else{ document.body.classList.remove('light'); localStorage.setItem('gj_mode','dark'); }
+    }
+
+    toggleTheme.addEventListener('click',()=>{
+      const light = document.body.classList.toggle('light');
+      localStorage.setItem('gj_mode', light? 'light':'dark');
+    });
+
+    expandAll.addEventListener('click',()=>{
+      document.querySelectorAll('details').forEach(d=>d.open=true);
+    });
+    collapseAll.addEventListener('click',()=>{
+      document.querySelectorAll('details').forEach(d=>d.open=false);
+    });
+
+    // restore mode
+    const saved = localStorage.getItem('gj_mode');
+    if(saved==='light') document.body.classList.add('light');
+  </script>
+</body>
+</html>
